@@ -1,4 +1,4 @@
-class PasswordController < ApplicationController
+class AuthorizationController < ApplicationController
 
     #Confirmar a conta
     def confirm

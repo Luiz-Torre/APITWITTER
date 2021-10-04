@@ -1,0 +1,12 @@
+<div class="containerEmail">
+    <div class="sessaoTitulo">
+        <h1>Bem vindo ao TwitterApi do Luiz!</h1>
+    </div>
+
+    <p> Confirme sua conta clicando no botão abaixo </p>
+    <%= link_to "Confirme sua conta",' http://127.0.0.1:3000://confirm_email'+(@user.validate_token) %>
+
+    <div class="lineDivisoria"/>
+    <p> Caso não tenha sido você que tenha feito essa requisição, ignore esse email </p>
+    <p> Esse é um email automático, não responda! </p>
+</div>

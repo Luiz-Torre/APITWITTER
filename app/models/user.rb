@@ -3,12 +3,13 @@ class User < ApplicationRecord
 
 
     #Validações
-    validates :name, :email, presence: true
+    validates :name,:nickname, :birthdate, :email, presence: true
     validates :password, :password_confirmation, length: {minimum:8}, :if => :password
     VALID_EMAIL_FORMAT= /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i
     validates :email, uniqueness: true, length:{maximum:100}
-    validates :cpf, uniqueness: true, format: {with: /\b\d{3}\.\d{3}\.\d{3}-\d{2}\z/}, presence: true
-    validates :phone, presence: true, uniqueness: true, format: {with: /(\(?\d{2}\)?\s)?(\d{4,5}\-\d{4})/, message: "Utilize um telefone valido. Exemplo: (21) 90000-0000"}
+    validates :cellphone, presence: true, uniqueness: true, format: {with: /(\(?\d{2}\)?\s)?(\d{4,5}\-\d{4})/, message: "Utilize um telefone valido. Exemplo: (21) 90000-0000"}
+
+
 
     #auxiliar na validação do email 
     before_save {self.email = email.downcase}
@@ -26,6 +27,11 @@ class User < ApplicationRecord
         (self.validate_token_sent_at + 7.days) > Time.now.utc
     end
 
+    def email_activate
+        self.email_confirmed = true
+        self.validate_token= nil
+        save!(:validate => true)
+    end
 
     #Gerar o token
     private       
