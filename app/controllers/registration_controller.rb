@@ -21,23 +21,6 @@ class RegistrationController < ApplicationController
     
     end
     #Confirmar o email
-    def confirm_email
-      token = params[:token].to_s
-
-    if params[:token].blank?
-      return render json: {error: 'Token Invalido'}, status: :not_found
-    end
-
-    user = User.find_by(validate_token: token)
-
-    if user.present? && user.validate_token_valid?
-        user.email_activate
-        flash[:success] = "Email confirmado"
-      else
-        flash[:error] = "Token Invalido"
-      end
-    end
-    
     private
       def user_params
         params.require(:user).permit(:name, :nickname, :birthdate,:password, :password_confirmation, :cellphone, :email)
