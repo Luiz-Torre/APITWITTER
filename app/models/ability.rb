@@ -7,6 +7,9 @@ class Ability
     
     if user.present?
       can :post, :read, Post
+      can :post, :read, Comment
+      can :manage, Comment, user_id: user.id
+
       can :manage, Post, user_id: user.id
       can :read, User
     end
