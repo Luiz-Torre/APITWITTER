@@ -16,7 +16,7 @@ class PostsController < ApplicationController
   # POST /posts
   def create
     @post = Post.new(post_params)
-
+    @post.user_id = current_user.id
     if @post.save
       render json: @post, status: :created, location: @post
     else
@@ -46,6 +46,6 @@ class PostsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def post_params
-      params.require(:post).permit(:user_id, :text)
+      params.require(:post).permit(:text)
     end
 end
