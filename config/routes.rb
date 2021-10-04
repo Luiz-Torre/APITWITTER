@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :users
+  resources :posts
   resources :user
 
   post '/confirm', to: 'registration#confirm_email'
